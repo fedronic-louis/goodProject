@@ -2,3 +2,4 @@ Django
 django_grappelli
 django-crispy-forms
 django-bootstrap-v5
+django-debug-toolbar

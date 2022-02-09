@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-kilvu%mt^k34jy05af4#yi4g0a#x&&l6+$_j*&*0cc7qo5yb@s
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,9 +47,11 @@ INSTALLED_APPS = [
     'produit',
     'bootstrap5',
     'lab',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -18,7 +18,8 @@ class AdminSeance(admin.ModelAdmin):
     list_display = ('id', 'code', 'description', 'sequence_attache')
 
 
-admin.site.register(Lab, AdminLab)
+# admin.site.register(Lab, AdminLab)
+admin.site.register(Lab)
 admin.site.register(Module, AdminModule)
 admin.site.register(Sequence, AdminSequence)
 admin.site.register(Seance, AdminSeance)

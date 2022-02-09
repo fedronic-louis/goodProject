@@ -14,19 +14,22 @@
         color:#fff;
 }
 {% endblock %}
+
 </style>
 
 {% block content %}
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h2> Gestion des laboratoires(échantillons) </h2><hr /><br />
+        <div class="col-md-12">
+            <h2> Gestion des laboratoires(échantillons) </h2>
+            <hr/>
+            <br/>
 
-		<form method="post" action="" class="uniForm">
-		 {% csrf_token %}
-     {% crispy form %}
-    </form>
-     </div>
+            <form method="post" action="" class="uniForm">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </div>
     </div>
- </div>
+</div>
 {% endblock %}

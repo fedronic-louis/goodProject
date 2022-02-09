@@ -58,3 +58,16 @@ def lab_delete(request, pk, template_name='lab/lab_confirm_delete.html'):
         labs.delete()
         return redirect('lab:lab_list')
     return render(request, template_name, {'object': labs})
+
+
+# @staff_member_required
+# def lab_views(request, pk, template_name='lab/lab_view.html'):
+#     if request.user.is_superuser:
+#         labs = get_object_or_404(Lab, pk=pk)
+#     else:
+#         labs = get_object_or_404(Lab, pk=pk, user=request.user)
+#     if request.method == 'POST':
+@staff_member_required
+def lab_views(request, pk, template_name='lab/listPicture.html'):
+    pictures = Lab.objects.filter(id__exact=pk)
+    return render(request, template_name, {'pictures': pictures,'pk':pk})
