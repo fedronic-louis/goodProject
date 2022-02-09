@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head_title %} produits | {{ block.super }} {% endblock %}
+
+<style>
+{% block style %}
+.navbar-static-top {
+        margin-bottom: 0px !important;
+        background-color:#93b3ee;
+}
+.jumbotron {
+        background-color:#93b3ee;
+        color:#fff;
+}
+{% endblock %}
+
+</style>
+{% block content %}
+{% if request.user.is_authenticated %}
+<!-- <div class="container"> -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Il y a {{ produits|length}} produits enregistrés</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive-md">
+            <table class="table table-borderd table-hover table-striped">
+                <thead>
+
+                <tr>
+                    <th class="col-sm-1">Id</th>
+                    <th class="col-sm-2">Code Titre</th>
+                    <th class="col-sm-1">Sigle</th>
+                    <th class="col-sm-3">Intitule</th>
+                    <th class="col-sm-2">GRN</th>
+                    <th class="col-sm-1">Milisime</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in produits %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.sigle }}</td>
+                    <td>{{ item.intitule }}</td>
+                    <td>{{ item.grn }}</td>
+                    <td>{{ item.milisime }}</td>
+
+
+                    <td align="center">
+                        <a href="{% url 'produit:produit_update' item.id %}">
+                            <button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal"
+                                    data-target="#edit">
+                                <span class="glyphicon glyphicon-pencil">
+                                    Update
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                    <td align="center">
+                        <a href="{% url 'produit:produit_delete' item.id %}">
+                            <button class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal"
+                                    data-target="#delete">
+                                <span class="glyphicon glyphicon-trash">
+                                    Delete
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div> <!-- list group -->
+
+
+        <div class="pagination">
+			<span class="step-links">
+				{% if produits.has_previous %}
+					<a href="?page={{ produits.previous_page_number }}">previous</a>
+				{% endif %}
+				<span class="current">
+					Page {{ produits.number }} of {{ produits.paginator.num_pages }}.
+				</span>
+
+				{% if produits.has_next %}
+					<a href="?page={{ produits.next_page_number }}">next</a>
+				{% endif %}
+			</span>
+        </div>
+        </tbody>
+        </table>
+
+    </div>
+</div>
+</div>
+
+<div class="row">
+    <div class='col-sm-3'>
+    </div>
+
+    <div class='col-sm-2'>
+        <p><a class="btn btn-md btn-primary" href="/produit/add" role="button">Nouveau Produit </a></p>
+    </div>
+    <div class='col-sm-2'>
+        <p><a class="btn btn-md btn-primary" href="{% url 'home' %}" role="button">Retour Menu</a></p>
+    </div>
+    <div class='col-sm-8'>
+    </div>
+</div>
+
+{% else %}
+<h1>Need to log in </h1>
+{% endif %}
+{% endblock %}
+

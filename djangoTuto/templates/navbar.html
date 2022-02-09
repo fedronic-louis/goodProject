@@ -1,0 +1,67 @@
+{% load static %}
+<nav class="navbar navbar-default fixed-top navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+ <!--  <nav class="navbar navbar-expand-lg navbar-dark indigo"> -->
+   <img src="/static/media/Logo-AFPA-1.jpeg" width="60px" class="d-inline-block align-left" alt="AFPA DevOps Marseille">
+    <a class="navbar-brand" href="https://www.devops-afpa.fr">AFPA DevOps Marseille</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+ <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+    <li class="nav-item active"> <a class="nav-link" href="{% url 'home' %}">Accueil<span class="sr-only">(current)</span></a>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">A propos</a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="">Le centre</a>
+          <a class="dropdown-item" href="">l'équipe</a>
+          <a class="dropdown-item" href="">Les titres</a>
+         </div>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Produits</a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/produit/list">Liste des produit</a>
+            <a class="dropdown-item" href="/produit/add">Ajouter un produit </a>
+        </div>
+    </li>
+
+     {% if request.user.is_staff %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Gestion commerciale</a>
+        <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="/commercial/">Inscription</a>
+               <a class="dropdown-item" href="/commercial/">Droits</a>-
+            </div>
+      </li> 
+    {% endif %}
+
+      <li class="nav-item"> <a class="nav-link" href="">Contact</a>
+      </li>
+       
+    {% if request.user.is_authenticated %}
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+        <a class="btn btn-indigo btn-sm" href="" role="button">Déconnecter</a>
+      </li>
+      </ul></div>
+    {% endif %} 
+
+      {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+        <a class="btn btn-indigo btn-sm" href="" role="button">Se connecter</a>
+        </li>
+      </ul> </div>
+      {% endif %}
+    </ul>
+  </div></div>
+</nav>

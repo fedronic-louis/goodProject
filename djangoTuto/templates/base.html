@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/img/favicon.ico">
+    <title>AFPA DevOps Marseille</title>
+    <meta name="author" content="AFPA DevOps Marseille">
+    <meta name="description" content="Apprendre à développer">
+    <meta name="keywords" content="formation, devops, cda, developpement, systeme">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <title>{% block head_title %}AFPA Formations{% endblock %}</title>
+    {% include 'head_css.html' %}
+    {% include 'javascript.html' %}
+
+    <style>
+    {% block style %}
+    {% endblock %}
+    </style>
+
+    <div class="header">
+        {% include 'navbar.html' %}
+    </div>
+  </head>
+
+  <main class="mt-5">
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </main>
+
+ {% include 'footer.html' %}
+</html>
