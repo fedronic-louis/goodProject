@@ -1,16 +1,19 @@
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Produit
+from django.shortcuts import render, redirect, get_object_or_404
+
 from .forms import ProduitForm
+from .models import Produit
+
 
 def home(request):
     return render(request, "produit/index.html", {})
 
+
 @staff_member_required
 def produit_list(request, template_name='produit/list.html'):
     contact_list = Produit.objects.all()
-    paginator = Paginator(contact_list, 10 )
+    paginator = Paginator(contact_list, 10)
     page = request.GET.get('page')
     try:
         produits = paginator.page(page)
@@ -18,7 +21,8 @@ def produit_list(request, template_name='produit/list.html'):
         produits = paginator.page(1)
     except EmptyPage:
         produits = paginator.page(paginator.num_pages)
-    return render(request,template_name, {'produits': produits })
+    return render(request, template_name, {'produits': produits})
+
 
 @staff_member_required
 def produit_create(request, template_name='produit/produit_form.html'):
@@ -28,27 +32,29 @@ def produit_create(request, template_name='produit/produit_form.html'):
         produits.user = request.user
         produits.save()
         return redirect('produit:produit_list')
-    return render(request, template_name, {'form':form})
+    return render(request, template_name, {'form': form})
+
 
 @staff_member_required
 def produit_update(request, pk, template_name='produit/produit_form.html'):
     if request.user.is_superuser:
-        produits= get_object_or_404(Produit, pk=pk)
+        produits = get_object_or_404(Produit, pk=pk)
     else:
-        produits= get_object_or_404(Produit, pk=pk, user=request.user)
+        produits = get_object_or_404(Produit, pk=pk, user=request.user)
     form = ProduitForm(request.POST or None, instance=produits)
     if form.is_valid():
         form.save()
         return redirect('produit:produit_list')
-    return render(request, template_name, {'form':form})
+    return render(request, template_name, {'form': form})
+
 
 @staff_member_required
-def produit_delete(request, pk, template_name='lab/produit_confirm_delete.html'):
+def produit_delete(request, pk, template_name='produit/produit_confirm_delete.html'):
     if request.user.is_superuser:
-        produits= get_object_or_404(Produit, pk=pk)
+        produits = get_object_or_404(Produit, pk=pk)
     else:
-        produits= get_object_or_404(Produit, pk=pk, user=request.user)
-    if request.method=='POST':
+        produits = get_object_or_404(Produit, pk=pk, user=request.user)
+    if request.method == 'POST':
         produits.delete()
         return redirect('produit:produit_list')
-    return render(request, template_name, {'object':produits})
+    return render(request, template_name, {'object': produits})

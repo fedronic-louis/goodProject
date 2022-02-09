@@ -31,7 +31,7 @@ def lab_create(request, template_name='lab/lab_form.html'):
         labs = form.save(commit=False)
         labs.user = request.user
         labs.save()
-        return redirect('lab_list')
+        return redirect('lab:lab_list')
     return render(request, template_name, {'form': form})
 
 
