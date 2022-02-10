@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from . import views
+from django.conf.urls.static import static
+from . import views, settings
 
 urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
@@ -28,4 +28,4 @@ urlpatterns = [
     path('pedago/', include(('pedago.urls', 'pedago'), namespace='pedago')),
     path('administration/', include(('administration.urls', 'administration'), namespace='administration')),
     path('', views.home, name='home'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

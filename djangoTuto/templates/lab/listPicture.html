@@ -50,12 +50,6 @@
                 <tbody>
 
                 <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.code }}</td>
-                    <td>{{ item.sigle }}</td>
-                    <td>{{ item.intitule }}</td>
-                    <td>{{ item.grn }}</td>
-                    <td>{{ item.milisime }}</td>
 
                     <td>{{ item.imageDescription }}</td>
                     <td>{{ item.picture }}</td>
@@ -64,22 +58,15 @@
                         {% for item in pictures %}
                         <div class="media">
 
-                        <img src="{{item.picture.url}}", alt="img"/>
+                        <img src="{{item.picture.url}}"/>
                         </div>
-<!--                        <p class="media">-->
 
-<!--                            <a href="/pictures/{{item.picture}}/">-->
-<!--                                <img scr="{{post.item.picture.url}}">{{picture}}-->
-<!--                            </a>-->
-<!--                        </p>-->
                         {{item.id}}
 
                         {% endfor %}
 
                             <button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal"data-target="#edit">
                                 <span class="glyphicon glyphicon-pencil">Views</span>
-                                <img src="{{item.picture.url}}", alt="img"/>
-
                             </button>
                     </td>
 

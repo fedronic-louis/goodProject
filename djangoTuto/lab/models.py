@@ -10,7 +10,7 @@ class Lab(models.Model):
     milisime = models.CharField(max_length=20, blank=True, default="none")
 
     imageDescription = models.CharField(max_length=255,null=True)
-    picture = models.ImageField(upload_to='pics/', null=True)
+    picture = models.ImageField(upload_to='pics/', null=True)#settings.MEDIA_ROOT
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
 
